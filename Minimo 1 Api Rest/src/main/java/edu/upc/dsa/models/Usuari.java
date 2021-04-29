@@ -6,48 +6,54 @@ public class Usuari {
 
     String id;
     String nom;
-    String pwd;
+    boolean vacunado;
+    String nombreVacuna;
+
 
     static int lastId;
 
     public Usuari() {
-        this.id = RandomUtils.getId();//al igual que en album, solo random la 1a vz
+        this.id = RandomUtils.getId();//cogeremos el primer vacunado al azar
     }
 
-    public Usuari(String nom, String pwd) {
+    public Usuari(String nom, String id, boolean vacunado) {
         this();
-        this.setPwd(pwd);
+        this.setId(id);
         this.setNom(nom);
+        this.setVacunado(vacunado);
     }
 
     public String getId() {
         return this.id;
     }
-
     public void setId(String id) {
         this.id=id;
     }
 
-
     public String getNom() {
         return nom;
     }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-    public String getPwd() {
-        return pwd;
+    public boolean getVacunado() {
+        return vacunado;
+    }
+    public void setVacunado(boolean vacunado) {
+        this.vacunado = vacunado;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
+    public String getNombreVacuna() { return this.nombreVacuna; }
+    public void setNombreVacuna(String nombreVacuna) { this.nombreVacuna = nombreVacuna; }
+
+
+
 
     @Override
     public String toString() {
-        return "Usuari [id="+id+", nom=" + nom + ", pwd=" + pwd +"]";
+        return "Usuari [nombreUsuario="+nom+", vacunado=" + vacunado + "nombre vacuna:"
+        +nombreVacuna+"]";
     }
 
 }

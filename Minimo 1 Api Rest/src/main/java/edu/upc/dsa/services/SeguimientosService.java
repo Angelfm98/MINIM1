@@ -15,29 +15,29 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Api(value = "/usuaris", description = "Endpoint to Usuaris Service")
-@Path("/usuaris")
-public class UsuarisService {
+@Api(value = "/seguimientos", description = "Endpoint to Seguimiento Service")
+@Path("/seguimientos")
+public class SeguimientosService {
 
     private Covid19Manager tm;
 
-    public UsuarisService() {
+    public SeguimientosService() {
         this.tm = Covid19ManagerImpl.getInstance();
         if (tm.VacunaSize()==0) {
-            this.tm.addUsuari("Angel", "Franco Martos", false);
-            this.tm.addUsuari("Ariadna", "Fàbrega Roig", false);
-            this.tm.addUsuari("Trinidad", "Pancorbo Garrido",true);
+            this.tm.addSeguimiento("Angel", "29/04", "bien");
+            this.tm.addSeguimiento("Maria", "27/03", "cefalea y fiebre, habrá más seguimiento");
+            this.tm.addSeguimiento("Trinidad", "23/04", "después de una noche de fiebre, perfecta");
         }
     }
 
     @GET
-    @ApiOperation(value = "get all Seguimientos", notes = "")
+    @ApiOperation(value = "get all Seguimientos", notes = "asdasd")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response = Seguimiento.class, responseContainer="List"),
     })
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSeguimiento() {
+    public Response getSeguimientos() {
 
         List<Seguimiento> seguimientos = this.tm.findAllSeguimientos();
 
@@ -54,7 +54,7 @@ public class UsuarisService {
     })
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSeguimiento(@PathParam("id") String id) {
+    public Response getAlbum(@PathParam("id") String id) {
         Seguimiento a = this.tm.getSeguimiento(id);
         if (a == null) return Response.status(404).build();
         else  return Response.status(201).entity(a).build();
@@ -67,7 +67,7 @@ public class UsuarisService {
             @ApiResponse(code = 404, message = "Vacuna not found")
     })
     @Path("/{id}")
-    public Response deleteSeguimiento(@PathParam("id") String id) {
+    public Response deleteAlbum(@PathParam("id") String id) {
         Seguimiento a = this.tm.getSeguimiento(id);
         if (a == null) return Response.status(404).build();
         else this.tm.deleteSeguimiento(id);
@@ -81,7 +81,7 @@ public class UsuarisService {
             @ApiResponse(code = 404, message = "Vacuna not found")
     })
     @Path("/")
-    public Response updateSeguimiento(Seguimiento seguimiento) {
+    public Response updateAlbum(Seguimiento seguimiento) {
 
         Seguimiento a = this.tm.updateSeguimiento(seguimiento);
 
